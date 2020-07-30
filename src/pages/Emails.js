@@ -62,7 +62,7 @@ class Email extends React.Component {
         </section>
 
         <section className="custom-message">
-          <h1>Send custom message</h1>
+          <h1>Send Custom Message</h1>
           <Container>
             <Row>
               <Col md={{ span: 8, offset: 2 }}>
