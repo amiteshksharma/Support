@@ -1,0 +1,93 @@
+.App {
+    text-align: center;
+    min-height: calc(100vh);
+    background-color: aliceblue;
+}
+  
+.app-display {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+}
+
+/* The display for the sidebar and the tabs on there */
+.sidebar-section {
+  position: relative;
+  width: calc(18%);
+  box-shadow: 1px 1px 15px black;
+  border-top-right-radius: calc(1rem);
+  border-bottom-right-radius: calc(1rem);
+}
+
+.sidebar-section h1 {
+    padding-top: calc(2vh);
+    font-size: calc(1.5vw);
+}
+
+.sidebar-section hr {
+    background-color: black;
+    width: calc(80%);
+}
+
+.sidebar {
+  background-color: rgb(43, 192, 192);
+  min-height: calc(94vh);
+  border-top-right-radius: calc(1rem);
+  border-bottom-right-radius: calc(1rem);
+  width: calc(100%);
+}
+
+.sidebar-tabs {
+  list-style: none;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding-left: calc(0vh);
+  padding-top: calc(0vh);
+  vertical-align: middle;
+}
+
+.sidebar-tabs li {
+  width: 100%;
+  height: calc(7vh);
+  font-size: calc(1.1vw);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: ease-out 0.2s;
+}
+
+.sidebar-tabs li:hover {
+  background-color: blueviolet;
+  border-radius: calc(1.2rem);
+  transition: ease-in 0.2s;
+}
+
+.content {
+  background-color: rgb(255, 255, 255);
+  width: 100%;
+}
+
+/* The content of the actual page */
+.render-buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.send-message, .custom-message {
+  margin-top: calc(4vh);
+  width: 100%;
+  min-height: calc(90vh);
+}
+
+.send-message h1, .custom-message h1 {
+  font-size: calc(1.2vw);
+}
+
+.custom-message {
+  border-left: 1px solid black;
+}
