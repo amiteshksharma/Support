@@ -1,6 +1,7 @@
 import React from 'react';
 import '../css/Email.css';
 import Bar from '../components/Bar';
+import Messages from '../components/Messages';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Button, Form, Container, Row, Col } from 'react-bootstrap';
 import { withRouter } from 'react-router-dom';
@@ -11,11 +12,14 @@ class Email extends React.Component {
       super(props);
 
       this.state = {
-        Query: this.props.location.state
+        Query: this.props.location.state,
+        Message: this.props.location.state,
+        Email: ''
       }
 
       this.changePage = this.changePage.bind(this);
       this.renderButtons = this.renderButtons.bind(this);
+      this.sendEmail = this.sendEmail.bind(this);
   }
 
   changePage(queryname) {
@@ -25,9 +29,19 @@ class Email extends React.Component {
         state: queryname
       });
 
-      this.setState({Query: queryname})
-      console.log(this.state.Query);
-      // fetch("/email").then(response => response.text()).then(data => console.log(data));
+      this.setState({Query: queryname}, () => this.setState({Message: Messages(this.state.Query)}))
+  }
+
+  sendEmail() {
+    fetch("/email", {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        email: this.state.Email 
+      }),
+    }).then(response => response.text()).then(data => console.log(data));
   }
 
   renderButtons() {
@@ -41,7 +55,7 @@ class Email extends React.Component {
                 <Form>
                   <Form.Group controlId="formGroupPassword">
                     <Form.Label>Your email address</Form.Label>
-                    <Form.Control type="email" placeholder="Ex) hello@gmail.com" />
+                    <Form.Control type="email" placeholder="Ex) hello@gmail.com" onChange={(e) => this.setState({Email: e.target.value})} />
                   </Form.Group>
                 </Form> 
               </Col>
@@ -51,14 +65,14 @@ class Email extends React.Component {
                 <Form>
                   <Form.Group controlId="formGroupPassword">
                     <Form.Label>Preset Message</Form.Label>
-                    <Form.Control type="text" value={"hello hello"} as="textarea" rows="20"/>
+                    <Form.Control type="text" value={this.state.Message} as="textarea" rows="20"/>
                   </Form.Group>
                 </Form>
               </Col>
             </Row>
           </Container>
 
-          <Button className="p-1 pr-5 pl-5">Submit!</Button>
+          <Button className="p-1 pr-5 pl-5" onClick={() => this.sendEmail()}>Submit!</Button>
         </section>
 
         <section className="custom-message">
