@@ -44,10 +44,6 @@ class Email extends React.Component {
     }).then(response => response.text()).then(data => console.log(data));
   }
 
-  componentDidMount() {
-    fetch("/scraper").then(response => response.text()).then(data => console.log(data));  
-  }
-
   renderButtons() {
     return (
       <div className="render-buttons">

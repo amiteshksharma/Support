@@ -1,0 +1,41 @@
+.donations {
+    width: 100%;
+    min-height: calc(94vh);
+}
+
+.donation-display {
+    display: flex;
+    justify-content: center;
+}
+
+.donation-content {
+    margin-top: calc(17vh);
+    width: calc(60%);
+    display: grid;
+    grid-template-columns: calc(33%) calc(33%) calc(33%);
+}
+
+.donation-search {
+    width: 30%;
+    position: absolute;
+    top: calc(13vh);
+    left: calc(35%);
+}
+
+.donation-results {
+    position: absolute;
+    left: calc(18vw);
+    top: calc(19vh);
+}
+
+.donation-results h1 {
+    font-size: calc(1vw);
+}
+
+.loading {
+    position: absolute;
+    transform: scale(3);
+    top: calc(40%);
+    left: calc(50%);
+
+}

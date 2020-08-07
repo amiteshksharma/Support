@@ -7,9 +7,9 @@ require('dotenv').config()
 
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
-});
+// router.get('/', function(req, res, next) {
+//   res.render('index', { title: 'Express' });
+// });
 
 router.post('/email', (req, res, next) => {
   const email = req.body.email;
