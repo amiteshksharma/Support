@@ -11,7 +11,7 @@ function Bar(props) {
             <Nav className="mr-auto" defaultActiveKey={props.active}>
                 <Nav.Link href="/" eventKey="1">Email</Nav.Link>
                 <Nav.Link href="/donations" eventKey="2">Donations</Nav.Link>
-                <Nav.Link href="#link" eventKey="3">Petitions</Nav.Link>
+                <Nav.Link href="/petitions" eventKey="3">Petitions</Nav.Link>
                 <Nav.Link href="#link" eventKey="4">Contact us</Nav.Link>
             </Nav>
         </Navbar.Collapse>

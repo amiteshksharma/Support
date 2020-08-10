@@ -1,34 +1,35 @@
-.donations {
+.petitions {
     width: 100%;
     min-height: calc(94vh);
 }
 
-.donation-display {
+.petition-display {
     display: flex;
     justify-content: center;
 }
 
-.donation-content {
+.petition-content {
     margin-top: calc(17vh);
-    width: calc(60%);
+    width: calc(100%);
     display: grid;
-    grid-template-columns: calc(33%) calc(33%) calc(33%);
+    justify-content: center;
+    grid-template-columns: calc(55%);
 }
 
-.donation-search {
+.petition-search {
     width: 30%;
     position: absolute;
     top: calc(13vh);
     left: calc(35%);
 }
 
-.donation-results {
+.petition-results {
     position: absolute;
     left: calc(18vw);
     top: calc(19vh);
 }
 
-.donation-results h1 {
+.petition-results h1 {
     font-size: calc(1vw);
 }
 
@@ -40,7 +41,7 @@
 
 }
 
-.no-results {
+.no-results-petition {
     position: relative;
     width: 100%;
     text-align: center;

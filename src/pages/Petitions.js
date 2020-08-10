@@ -1,8 +1,8 @@
 import React from 'react';
-import '../css/Donations.css';
+import '../css/Petitions.css';
 import Bar from '../components/Bar';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Tile from '../components/Tile';
+import Node from '../components/Node';
 import { withRouter } from 'react-router-dom';
 import { InputGroup, FormControl, Button, Spinner } from 'react-bootstrap';
 
@@ -12,7 +12,7 @@ class Email extends React.Component {
       super(props);
 
       this.state = {
-        Donations: [],
+        Petitions: [],
         Loading: false,
         Search: '',
         Render: false
@@ -25,11 +25,11 @@ class Email extends React.Component {
 
   componentDidMount() {
     if(sessionStorage.getItem('search')) {
-      this.setState({Search: sessionStorage.getItem('search'), Text: sessionStorage.getItem('search')});
+      this.setState({Search: sessionStorage.getItem('searchp'), Text: sessionStorage.getItem('searchp')});
     }
 
-    if(sessionStorage.getItem('results')) {
-      this.setState({Donations: JSON.parse(sessionStorage.getItem('results'))});
+    if(sessionStorage.getItem('resultsp')) {
+      this.setState({Petitions: JSON.parse(sessionStorage.getItem('resultsp'))});
     }
   }
 
@@ -43,7 +43,7 @@ class Email extends React.Component {
   searchResults() {
     console.log("here");
     this.setState({Loading: true})
-    fetch("/scraper", {
+    fetch("/scraper/petitions", {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -54,21 +54,21 @@ class Email extends React.Component {
     })
     .then(response => response.json())
     .then(data => {
-      this.setState({Donations: data, Loading: false, Text: this.state.Search}, () => {
-        if(this.state.Donations.length === 0) {
+      this.setState({Petitions: data, Loading: false, Text: this.state.Search}, () => {
+        if(this.state.Petitions.length === 0) {
           this.setState({Render: true});
         }
       });
-      sessionStorage.setItem('search', this.state.Search);
-      sessionStorage.setItem('results', JSON.stringify(this.state.Donations));
+      sessionStorage.setItem('searchp', this.state.Search);
+      sessionStorage.setItem('resultsp', JSON.stringify(this.state.Petitions));
     });        
   }
 
   noResults() {
-    console.log(this.state.Donations);
-    if(this.state.Donations.length === 0 && this.state.Render) {
+    console.log(this.state.Petitions);
+    if(this.state.Petitions.length === 0 && this.state.Render) {
       return (
-        <h1 className="no-results">No Results found for "{this.state.Search}"</h1>
+        <h1 className="no-results-petition">No Results found for "{this.state.Search}"</h1>
       )
     }
   }
@@ -76,16 +76,16 @@ class Email extends React.Component {
   
   render() {
     return (
-      <div className="Donations">
-        <Bar active={"2"} />
+      <div className="Petitions">
+        <Bar active={"3"} />
 
-        <div className="donation-search">
+        <div className="petition-search">
           <InputGroup className="mb-3 w-100" onSubmit={() => this.searchResults()}>
             <InputGroup.Prepend>
               <InputGroup.Text id="basic-addon1">@</InputGroup.Text>
             </InputGroup.Prepend>
             <FormControl
-              placeholder="Search for Donations"
+              placeholder="Search for Petitions"
               aria-label="Username"
               aria-describedby="basic-addon1"
               value={this.state.Search}
@@ -98,17 +98,19 @@ class Email extends React.Component {
           </InputGroup>
         </div>
 
-        <span className="donation-results">
-          {this.state.Donations.length !== 0 && !this.state.Loading ? <h1>Showing results for "{this.state.Text}" (All {this.state.Donations.length} results)</h1> : null}
+        <span className="petition-results">
+          {this.state.Petitions.length !== 0 && !this.state.Loading ? <h1>Showing results for "{this.state.Text}" (All {this.state.Petitions.length} results)</h1> : null}
         </span>
 
-        <div className="donation-display">
-          <section className="donation-content">
-            {this.state.Loading ? <div className="loading"><Spinner animation="border" variant="info"/></div> : this.state.Donations.map(donation => (
-                <Tile title={donation.Title} text={donation.Text}
-                    link={donation.Link} raised={donation.Raised}
-                    image={donation.Image} />
-            ))  }
+        <div className="petition-display">
+          <section className="petition-content">
+            {this.state.Loading ? <div className="loading"><Spinner animation="border" variant="info"/></div> : this.state.Petitions.map(petition => (
+                <Node title={petition.Title} text={petition.Text}
+                    link={petition.Link} signatures={petition.Signatures}
+                    image={petition.Image} user={petition.User} 
+                    state={petition.State}
+                    />
+            ))}
           </section>
         </div>
 

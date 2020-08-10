@@ -13,6 +13,7 @@ require('dotenv').config()
 
 router.post('/email', (req, res, next) => {
   const email = req.body.email;
+  const message = req.body.message;
   (async () => {
     console.log(email);
     //Create the information for the client
@@ -50,7 +51,7 @@ router.post('/email', (req, res, next) => {
       from: 'We demand change <bringingchange12@gmail.com>', // sender address
       to: "spainrulzs@gmail.com", // list of receivers
       subject: `We Demand Change from ${email}`, // Subject line
-      text: "Hello world?", // plain text body
+      text: message, // plain text body
     });
 
     console.log("Message sent: %s", info.messageId);

@@ -5,6 +5,14 @@
     margin-top: calc(0.5vh);
     min-height: calc(40vh);
     box-shadow: 4px 4px 20px rgb(206, 206, 206);
+    transition: ease-out 0.3s;
+    cursor: pointer;
+}
+
+.tile:hover {
+    transition: ease-in 0.3s;
+    transform: scale(1.1);
+    -webkit-transform: scale(1.1);
 }
 
 .tile img {

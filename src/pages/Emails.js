@@ -13,8 +13,10 @@ class Email extends React.Component {
 
       this.state = {
         Query: this.props.location.state,
-        Message: this.props.location.state,
-        Email: ''
+        Message: '',
+        Email: '',
+        Custom: '',
+        EmailCustom: ''
       }
 
       this.changePage = this.changePage.bind(this);
@@ -32,14 +34,20 @@ class Email extends React.Component {
       this.setState({Query: queryname}, () => this.setState({Message: Messages(this.state.Query)}))
   }
 
-  sendEmail() {
+  sendEmail(email, message) {
+    if(email.length === 0 || message.length === 0) {
+      message = this.state.Message;
+      return;
+    }
+
     fetch("/email", {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        email: this.state.Email 
+        email: email,
+        message: message 
       }),
     }).then(response => response.text()).then(data => console.log(data));
   }
@@ -55,7 +63,8 @@ class Email extends React.Component {
                 <Form>
                   <Form.Group controlId="formGroupPassword">
                     <Form.Label>Your email address</Form.Label>
-                    <Form.Control type="email" placeholder="Ex) hello@gmail.com" onChange={(e) => this.setState({Email: e.target.value})} />
+                    <Form.Control type="email" placeholder="Ex) hello@gmail.com" 
+                    onChange={(e) => this.setState({Email: e.target.value})} />
                   </Form.Group>
                 </Form> 
               </Col>
@@ -65,14 +74,16 @@ class Email extends React.Component {
                 <Form>
                   <Form.Group controlId="formGroupPassword">
                     <Form.Label>Preset Message</Form.Label>
-                    <Form.Control type="text" value={this.state.Message} as="textarea" rows="20"/>
+                    <Form.Control type="text" value={this.state.Message} as="textarea" rows="20" 
+                      readonly
+                    />
                   </Form.Group>
                 </Form>
               </Col>
             </Row>
           </Container>
 
-          <Button className="p-1 pr-5 pl-5" onClick={() => this.sendEmail()}>Submit!</Button>
+          <Button className="p-1 pr-5 pl-5" onClick={() => this.sendEmail(this.state.Email, this.state.Message)}>Submit!</Button>
         </section>
 
         <section className="custom-message">
@@ -83,7 +94,8 @@ class Email extends React.Component {
                 <Form>
                   <Form.Group controlId="formGroupPassword">
                     <Form.Label>Your email address</Form.Label>
-                    <Form.Control type="email" placeholder="Ex) hello@gmail.com" />
+                    <Form.Control type="email" placeholder="Ex) hello@gmail.com"
+                      onChange={(e) => this.setState({EmailCustom: e.target.value})} />
                   </Form.Group>
                 </Form> 
               </Col>
@@ -91,14 +103,19 @@ class Email extends React.Component {
                 <Form>
                   <Form.Group controlId="formGroupPassword">
                     <Form.Label>Type Message</Form.Label>
-                    <Form.Control type="text" placeholder="Message" as="textarea" rows="20"/>
+                    <Form.Control type="text" placeholder="Message" as="textarea" rows="20"
+                      onChange={(e) => this.setState({Custom: e.target.value})}
+                    />
                   </Form.Group>
                 </Form>
               </Col>
             </Row>
           </Container>  
 
-          <Button className="p-1 pr-5 pl-5">Submit!</Button>
+          <Button className="p-1 pr-5 pl-5" 
+          onClick={() => this.sendEmail(this.state.EmailCustom, this.state.Custom)}>
+            Submit!
+          </Button>
         </section>
       </div>
     )
