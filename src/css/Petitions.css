@@ -13,7 +13,7 @@
     width: calc(100%);
     display: grid;
     justify-content: center;
-    grid-template-columns: calc(55%);
+    grid-template-columns: calc(45%);
 }
 
 .petition-search {
@@ -31,6 +31,23 @@
 
 .petition-results h1 {
     font-size: calc(1vw);
+}
+
+.clear-results {
+    position: absolute;
+    left: calc(70vw);
+    top: calc(19vh);
+    cursor: pointer;
+}
+
+.clear-results h1 {
+    font-size: calc(1vw);
+}
+
+.clear-results:hover {
+    text-decoration: underline;
+    color: rgb(88, 88, 88);
+    cursor: pointer;
 }
 
 .loading {

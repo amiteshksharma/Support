@@ -4,6 +4,8 @@ import Bar from '../components/Bar';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Node from '../components/Node';
 import { withRouter } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faSearch} from '@fortawesome/free-solid-svg-icons'
 import { InputGroup, FormControl, Button, Spinner } from 'react-bootstrap';
 
 class Email extends React.Component {
@@ -21,6 +23,7 @@ class Email extends React.Component {
       this.searchResults = this.searchResults.bind(this);
       this.onKeyPress = this.onKeyPress.bind(this);
       this.noResults = this.noResults.bind(this);
+      this.clear = this.clear.bind(this);
   }
 
   componentDidMount() {
@@ -73,6 +76,18 @@ class Email extends React.Component {
     }
   }
 
+  clear() {
+    this.setState({
+      Petitions: [],
+      Loading: false,
+      Search: '',
+      Render: false
+    });
+
+    sessionStorage.setItem('searchp', '');
+    sessionStorage.setItem('resultsp', []);
+  }
+
   
   render() {
     return (
@@ -82,7 +97,7 @@ class Email extends React.Component {
         <div className="petition-search">
           <InputGroup className="mb-3 w-100" onSubmit={() => this.searchResults()}>
             <InputGroup.Prepend>
-              <InputGroup.Text id="basic-addon1">@</InputGroup.Text>
+              <InputGroup.Text id="basic-addon1"><FontAwesomeIcon icon={faSearch} /></InputGroup.Text>
             </InputGroup.Prepend>
             <FormControl
               placeholder="Search for Petitions"
@@ -100,6 +115,10 @@ class Email extends React.Component {
 
         <span className="petition-results">
           {this.state.Petitions.length !== 0 && !this.state.Loading ? <h1>Showing results for "{this.state.Text}" (All {this.state.Petitions.length} results)</h1> : null}
+        </span>
+
+        <span className="clear-results">
+          {this.state.Petitions.length !== 0 && !this.state.Loading ? <h1 onClick={() => this.clear()}>Clear Results</h1> : null} 
         </span>
 
         <div className="petition-display">

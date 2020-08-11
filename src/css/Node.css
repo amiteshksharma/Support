@@ -1,0 +1,55 @@
+.node {
+    background-color: rgb(218, 214, 214);
+    border-radius: calc(0.5vw);
+    box-shadow: 4px 4px 10px grey;
+    position: relative;
+    margin-bottom: calc(2vh);
+}
+
+.petition-details {
+    width: 100%;
+    text-align: left;
+}
+
+.petition-details .title {
+    font-size: calc(2vw);
+    width: calc(70%);
+    margin: calc(0.4vh) 0 0 calc(1vw);
+    font-weight: 500;
+}
+
+.petition-details .text {
+    margin: calc(0.7vh) 0 0 calc(1vw);
+}
+
+.node hr {
+    margin-right: calc(19%);
+    width: 80%;
+}
+
+.details {
+    margin: calc(-0.5vh) 0 0 calc(1vw);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.details .state {
+    margin-left: calc(0.3vw);
+    font-size: calc(0.7vw);
+}
+
+.details .raised {
+    margin-left: calc(2vw);
+
+}
+
+.node .image {
+    position: absolute;
+    top: calc(1vh);
+    right: calc(1vw);
+}
+
+.node .image img {
+    border-radius: calc(1rem);
+}

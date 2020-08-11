@@ -14,7 +14,7 @@
 .sidebar-section {
   position: relative;
   width: calc(18%);
-  box-shadow: 1px 1px 15px black;
+  box-shadow: 4px 4px 20px rgb(70, 69, 69);
   border-top-right-radius: calc(1rem);
   border-bottom-right-radius: calc(1rem);
 }
@@ -25,12 +25,12 @@
 }
 
 .sidebar-section hr {
-    background-color: black;
+    background-color: rgb(0, 0, 0);
     width: calc(80%);
 }
 
 .sidebar {
-  background-color: rgb(43, 192, 192);
+  background-color: rgb(255, 255, 255);
   min-height: calc(94vh);
   border-top-right-radius: calc(1rem);
   border-bottom-right-radius: calc(1rem);
@@ -59,8 +59,9 @@
 }
 
 .sidebar-tabs li:hover {
-  background-color: blueviolet;
+  background-color: rgb(27, 118, 223);
   border-radius: calc(1.2rem);
+  color: white;
   transition: ease-in 0.2s;
 }
 
